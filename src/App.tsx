@@ -1,10 +1,10 @@
 import React from 'react';
-import Connect from './connect'
+import Navbar from './navbar'
 
 function App() {
   return (
     <div className="App">
-      <Connect />
+      <Navbar />
       Hello World
     </div>
   );
