@@ -3,13 +3,14 @@
 * {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
 }
 
 .connect {
   padding: 20px;
   display: flex;
   align-items: center;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
 }
@@ -21,4 +22,55 @@
 
 .wallet {
   margin-left: auto;
+}
+
+.image {
+  grid-area: image;
+  background-color: aqua;
+}
+.topBid {
+  text-align: left;
+  grid-area: topBid;
+  /* background-color: orange; */
+  font-weight: normal;
+  letter-spacing: .125rem;
+  text-transform: uppercase;
+  font-family: -apple-system, 
+      BlinkMacSystemFont, 
+      "Segoe UI", 
+      Roboto, 
+      Oxygen-Sans, 
+      Ubuntu, 
+      Cantarell, 
+      "Helvetica Neue", 
+      sans-serif;
+  font-size: 1.5em;
+}
+.bid {
+  grid-area: bid;
+  height: 40px;
+}
+.placeBid {
+  grid-area: placeBid;
+  height: 40px;
+}
+.cancelBid {
+  grid-area: claimBid;
+  height: 40px;
+}
+.grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  gap: 15px;
+  row-gap: 25px;
+  grid-template-columns: 200px 200px 200px 200px 200px 200px;
+  grid-template-rows: 500px 40px 80px;
+  grid-template-areas: 
+  'image image image image image image'
+  'bid bid placeBid placeBid claimBid claimBid'
+  'topBid topBid topBid timer timer timer';
+}
+.bidspan {
+  margin-left: 10px;
 }
