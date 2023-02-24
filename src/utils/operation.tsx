@@ -14,7 +14,13 @@ export const bidOperation = async (tez: number) => {
 }
 
 export const cancelBidOperation = async () => {
-
+    try{
+        const contract = await tezos.wallet.at('KT1SXvgcy4jUQpJK8Q2dA8cNZs8bLxTj1E2r');
+        const op = await contract.methods.cancel_bid().send();
+        await op.confirmation(1); 
+    }catch(err){
+        throw err;
+    }
 }
 
 export const endAuctionOperation = async () => {
