@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { bidOperation } from "./utils/operation";
+import { bidOperation, cancelBidOperation } from "./utils/operation";
 
 const Auction = () => {
 
     const [loading, setLoading] = useState(false)
+    const [cancelling, setCancelling] = useState(false)
     const [tez, setTez] = useState("")
     const setBid = (event: React.ChangeEvent<HTMLInputElement>) => {
         let bidAmount: string = event.target.value;
@@ -21,14 +22,27 @@ const Auction = () => {
         setLoading(false);
     };
 
+    const onCancel = async () => {
+        try {
+            setCancelling(true);
+            await cancelBidOperation();
+            alert("Cancellation Confirmed")
+        } catch (error) {
+            alert("Cancellation failed!")
+        }
+        setCancelling(false);
+    };
+
     return ( 
     <div className="grid">
-    <div className="image">image</div>
+    <div className="image">Image of NFT to be minted</div>
     <input onChange={setBid} type="text" className="bid" id="bid" placeholder="tez" value={tez}/>
     <button onClick={onBid} className="placeBid">
-        { loading === true ? "Loading..." : "Place Bid" }
+        { loading === true ? "Bidding..." : "Place Bid" }
     </button>
-    <input type="button" className="cancelBid" value="Cancel Bid" />
+    <button onClick={onCancel} className="cancelBid">
+        { cancelling === true ? "Cancelling..." : "Cancel Bid" }
+    </button>
     <p className="topBid">Currect Bid: <span className="bidspan">CurrentBid Tez</span></p>
     <div className="timer">
     </div>
