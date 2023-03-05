@@ -1,16 +1,34 @@
-import { useState } from "react";
-import { bidOperation, cancelBidOperation } from "./utils/operation";
+import { useEffect, useState } from "react";
+import { bidOperation, cancelBidOperation, endAuctionOperation } from "./utils/operation";
+import { fetchStorage } from "./utils/tzkt";
 
 const Auction = () => {
 
-    const [loading, setLoading] = useState(false)
-    const [cancelling, setCancelling] = useState(false)
-    const [tez, setTez] = useState("")
+    const [loading, setLoading] = useState(false);
+    const [cancelling, setCancelling] = useState(false);
+    const [tez, setTez] = useState("");
+    const [bid, setTopBid] = useState(0);
+    const [live, setLive] = useState(true);
+    const [ending, setEnding] = useState(false);
     const setBid = (event: React.ChangeEvent<HTMLInputElement>) => {
         let bidAmount: string = event.target.value;
         setTez(bidAmount)
     }
    
+    useEffect(() => {
+        (async () => {
+            const today = new Date();
+            const weekday = today.getDay();
+            if (weekday > 3) {
+                setLive(true)
+            } else {
+                setLive(false)
+            };
+            const storage = await fetchStorage();
+            setTopBid(storage.topBidder);
+        })();
+    }, []);
+
     const onBid = async () => {
         try {
             setLoading(true);
@@ -20,6 +38,17 @@ const Auction = () => {
             alert("Transaction failed!")
         }
         setLoading(false);
+    };
+
+    const onEnd = async () => {
+        try {
+            setEnding(true);
+            await endAuctionOperation();
+            alert("Auction Ended")
+        } catch (error) {
+            alert("Auction end failed!")
+        }
+        setEnding(false);
     };
 
     const onCancel = async () => {
@@ -43,9 +72,8 @@ const Auction = () => {
     <button onClick={onCancel} className="cancelBid">
         { cancelling === true ? "Cancelling..." : "Cancel Bid" }
     </button>
-    <p className="topBid">Currect Bid: <span className="bidspan">CurrentBid Tez</span></p>
-    <div className="timer">
-    </div>
+    <p className="topBid">Currect Top Bidder: <span className="bidspan">{bid}</span></p>
+    <button className="timer" onClick={onEnd}> { live === true ? "Auction Ends Wednesday 24:00" : "End Auction" } </button>
     </div>
      );
 }

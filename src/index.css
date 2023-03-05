@@ -58,6 +58,10 @@
   grid-area: claimBid;
   height: 40px;
 }
+.timer {
+  grid-area: timer;
+  height: 40px;
+}
 .grid {
   max-width: 1200px;
   margin: auto;
@@ -69,7 +73,7 @@
   grid-template-areas: 
   'image image image image image image'
   'bid bid placeBid placeBid claimBid claimBid'
-  'topBid topBid topBid timer timer timer';
+  'topBid topBid topBid topBid timer timer';
 }
 .bidspan {
   margin-left: 10px;
