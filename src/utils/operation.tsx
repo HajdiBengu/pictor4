@@ -32,3 +32,13 @@ export const endAuctionOperation = async () => {
         throw err;
     }
 }
+
+export const startAuctionOperation = async () => {
+    try{
+        const contract = await tezos.wallet.at('KT1SXvgcy4jUQpJK8Q2dA8cNZs8bLxTj1E2r');
+        const op = await contract.methods.restart_auction().send();
+        await op.confirmation(1); 
+    }catch(err){
+        throw err;
+    }
+}
