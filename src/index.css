@@ -61,6 +61,7 @@
 .timer {
   grid-area: timer;
   height: 40px;
+  width: 415px;
 }
 .grid {
   max-width: 1200px;

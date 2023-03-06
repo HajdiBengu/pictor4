@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { startAuctionOperation } from "./utils/operation";
 
-const startButton = () => {
+const StartButton = () => {
     
     const [starting, setStarting] = useState(false);
     const onStart = async () => {
         try {
             setStarting(true);
             await startAuctionOperation();
-            alert("Auction Ended")
+            alert("Auction Started")
         } catch (error) {
-            alert("Auction end failed!")
+            alert("Auction start failed!")
         }
         setStarting(false);
     };
     
     return ( 
-        <button onClick={onStart} className="timer"> { starting === true ? "Ending..." : "End Auction" } </button>
+        <button onClick={onStart} className="timer"> { starting === true ? "Starting..." : "Start Auction" } </button>
      );
 }
  
-export default startButton;
+export default StartButton;
