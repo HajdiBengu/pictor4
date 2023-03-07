@@ -28,7 +28,7 @@ const Auction = () => {
                 setLive(true)
             };
             const storage = await fetchStorage();
-            setTopBid(storage.topBidder);
+            setTopBid(storage.topBid);
             setLiveAuction(storage.live)
         })();
     }, []);
@@ -69,7 +69,7 @@ const Auction = () => {
     <input onChange={setBid} type="text" className="bid" id="bid" placeholder="tez" value={tez}/>
     <button onClick={onBid} className="placeBid"> { loading === true ? "Bidding..." : "Place Bid" } </button>
     <button onClick={onCancel} className="cancelBid"> { cancelling === true ? "Cancelling..." : "Cancel Bid" } </button>
-    <p className="topBid">Currect Top Bidder: <span className="bidspan">{bid}</span></p>
+    <p className="topBid">Top Bid: <span className="bidspan">{bid}</span></p>
     <div>{message}</div>
     </div>
      );
