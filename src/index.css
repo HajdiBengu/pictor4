@@ -63,6 +63,9 @@
   height: 40px;
   width: 415px;
 }
+.bidspan {
+  margin-left: 10px;
+}
 .grid {
   max-width: 1200px;
   margin: auto;
@@ -75,7 +78,4 @@
   'image image image image image image'
   'bid bid placeBid placeBid claimBid claimBid'
   'topBid topBid topBid topBid timer timer';
-}
-.bidspan {
-  margin-left: 10px;
 }
