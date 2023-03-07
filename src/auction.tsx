@@ -28,10 +28,11 @@ const Auction = () => {
                 setLive(true)
             };
             const storage = await fetchStorage();
-            setTopBid(storage.topBid);
+            let topBid = storage.topBid / 1000000;
+            setTopBid(topBid);
             setLiveAuction(storage.live)
         })();
-    }, []);
+    });
 
     const onBid = async () => {
         try {
@@ -39,9 +40,11 @@ const Auction = () => {
             await bidOperation(Number(tez));
             alert("Transaction Confirmed")
         } catch (error) {
-            alert("Transaction failed!")
+            alert("Transaction failed!");
+            console.log(error);
         }
         setLoading(false);
+        setTez("")
     };
 
     const onCancel = async () => {
@@ -69,7 +72,7 @@ const Auction = () => {
     <input onChange={setBid} type="text" className="bid" id="bid" placeholder="tez" value={tez}/>
     <button onClick={onBid} className="placeBid"> { loading === true ? "Bidding..." : "Place Bid" } </button>
     <button onClick={onCancel} className="cancelBid"> { cancelling === true ? "Cancelling..." : "Cancel Bid" } </button>
-    <p className="topBid">Top Bid: <span className="bidspan">{bid}</span></p>
+    <p className="topBid">Top Bid: <span className="bidspan">{bid} Tez</span></p>
     <div>{message}</div>
     </div>
      );

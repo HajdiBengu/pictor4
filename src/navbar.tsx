@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { connect, getAccount } from "./utils/wallet"
+import { connect, disconnect, getAccount } from "./utils/wallet"
 
 const Navbar = () => {
     const [account, setAccount] = useState("");
@@ -12,19 +12,26 @@ const Navbar = () => {
     }, []);
 
     const onConnectWallet = async () => {
-        await connect();
-        const activeAccount = await getAccount();
-        setAccount(activeAccount);
+        if (account) {
+            await disconnect();
+            setAccount("");
+        } else {
+            await connect();
+            const activeAccount = await getAccount();
+            setAccount(activeAccount);
+        }
     };
 
     return (
         <nav className="connect">
             <h1 className="logo">PICTOR</h1>
             <button className="wallet" onClick={onConnectWallet}>
-                {account !== "" ? account : "Connect Wallet"}
+                {account !== "" ? "Disconnect Wallet" : "Connect Wallet"}
             </button>
         </nav>
     );
 }
  
 export default Navbar;
+
+        

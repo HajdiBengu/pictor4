@@ -18,3 +18,7 @@ export const getAccount = async () => {
         return "";
     }
 };
+
+export const disconnect = async () => {
+    await wallet.clearActiveAccount();
+};
