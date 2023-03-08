@@ -10,9 +10,9 @@ Basically, the dapp serves as the interface of the english auction. We’ll take
 
 The project uses ReactJS and is written in Typescript. Use these steps to run the project locally:
 
-> ```git clone https://github.com/HajdiBengu/pictor4```
-> ```npm install```
-> ```npm run start```
+* ```git clone https://github.com/HajdiBengu/pictor4```
+* ```npm install```
+* ```npm run start```
 
 ### How to Use the Project
 
