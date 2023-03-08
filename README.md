@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Pictor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project Description and Idea
 
-## Available Scripts
+Pictor is an open source decentralized app and uses two smart contracts that run on the Tezos Blockchain. One of them is an NFT contract that employs the FA2 standard, while the other is a time-locked English Auction. The idea behind them is to have the address of the winner of the auction stored in the FA2 contract. The NFT contract will then use that address when minting the new token. You can take a more detailed look into the contracts in this [link.](https://github.com/HajdiBengu/pictor-contracts)
 
-In the project directory, you can run:
+Basically, the dapp serves as the interface of the english auction. We’ll take a look at how to use the dapp below, but once you know how the two smart contracts work, you’ll be able to understand and test the dapp better.
 
-### `npm start`
+### How to Install and Run the Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The project uses ReactJS and is written in Typescript. Use these steps to run the project locally:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> ```git clone https://github.com/HajdiBengu/pictor4```
+> ```npm install```
+> ```npm run start```
 
-### `npm test`
+### How to Use the Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In order to test the dapp, you will need at least two Tezos addresses. The more the better, in order to simulate the auction. The dapp serves as the interface of the english auction. Take an in-depth look at the auction contract here, in order to learn how to use it.
 
-### `npm run build`
+In the dapp, use the button in the top right corner to connect the wallet. Once connected, you can click again to disconnect it. Below the image, you can find the input interface for the auction. You can bid and cancel the bid. The auction should be live Monday to Thursday. On Monday, a “Start Auction” button appears that anyone can click for the auction to restart. On Thursday, an “End Auction” button appears, so that people can end the auction, making the project fully decentralized.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In order to force the start and end button to appear without having to wait days, you can go to source/auction.tsx and manipulate the condition in line 25 from
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```(weekday > 3)``` to ```(weekday > x)``` where x can be anything from 0 to 6, depending on the day of the week you are testing the dapp.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### How the project can be improved
 
-### `npm run eject`
+As you might notice when testing the dapp, the image itself isn’t available and it is not linked to the NFT contract. So the first improvement for the project can be to make the image generative after each auction and have it minted automatically for the winner of the auction.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Another improvement point is to have the Start and End of auction automatically applied after their respective timelocks. (I deliberately didn't make those changes, in order to test functionalities locally, in development mode)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Furthermore, the project could be improved by removing the ability of the Top Bidder to use the “Cancel Bid” button in the UI.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### License: GNU GPLv3
